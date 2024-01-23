@@ -18,7 +18,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Kelas</th>
-                                <th>Tipe Kelas</th>
+                                <!-- <th>Tipe Kelas</th> -->
                                 <th width="10%">Aksi</th>
                             </tr>
                         </thead>
@@ -27,18 +27,9 @@
                             <tr>
                                 <td></td>
                                 <td>{{ $item->name_kelas }}</td>
+
                                 <td>
-                                    @if ($item->type_kelas == 0)
-                                    Gratis
-                                    @elseif($item->type_kelas == 1)
-                                    Regular
-                                    @elseif($item->type_kelas == 2)
-                                    Premium
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.kelas.detail',Crypt::encrypt($item->id)) }}"
-                                        class="btn btn-warning">Detail</a>
+                                    <a href="{{ route('admin.kelas.detail',Crypt::encrypt($item->id)) }}" class="btn btn-warning">Detail</a>
                                 </td>
                             </tr>
                             @endforeach

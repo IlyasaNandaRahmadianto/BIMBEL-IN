@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Materi;
 use App\Kelas;
 use App\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+
 
 class KelasController extends Controller
 {
@@ -18,7 +21,7 @@ class KelasController extends Controller
     public function index()
     {
         $data = [
-            'kelas' => Kelas::paginate(9)
+            'kelas' => Kelas::all()
         ];
 
         return view('front.kelas.index', $data);
@@ -27,10 +30,12 @@ class KelasController extends Controller
     public function detail($id)
     {
         $dec_id = Crypt::decrypt($id);
+        
         $data = [
-            'kelas' => Kelas::find($dec_id)
+            'materi' => Materi::where('id_kelas', $dec_id)->get(),
+            'kelas' => Kelas::where('id', $dec_id)->first()
         ];
-
+        // dd($data['materi']);
         return view('front.kelas.detail', $data);
     }
 

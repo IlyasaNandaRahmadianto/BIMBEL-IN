@@ -2,15 +2,17 @@
 
 namespace App;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaksi extends Model
 {
     protected $table = 'transaksi';
-    protected $fillable = ['users_id','bukti_transfer','status'];
+    protected $fillable = ['id_user', 'tanggal', 'jenis', 'jumlah', 'status', 'bukti_tf'];
 
-    public function users()
+    public function users(): BelongsTo
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }

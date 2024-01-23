@@ -13,7 +13,7 @@
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.kelas.simpan') }}" method="post" enctype="multipart/form-data">
-                    @csrf
+                    <!-- @csrf -->
                     <div class="form-group">
                         <label for="">Nama Kelas</label>
                         <input type="text" name="name_kelas" class="form-control @error('name_kelas') is-invalid @enderror" value="{{ old('name_kelas') }}">
@@ -36,7 +36,7 @@
                         <label for="">Deskripsi Kelas</label>
                         <textarea name="description_kelas" class="ckeditor @error('description_kelas') is-invalid @enderror" id="ckeditor">
                         {{ old('description_kelas') }}
-                    </textarea>
+                        </textarea>
                         @error('description_kelas')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror

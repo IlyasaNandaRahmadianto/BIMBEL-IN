@@ -35,24 +35,23 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand"> BIMBEL-IN </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
-                        <div class="collapse navbar-collapse main-menu-item justify-content-end"
-                            id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse main-menu-item justify-content-end" id="navbarSupportedContent">
                             <ul class="navbar-nav align-items-center">
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{{ route('welcome') }}">Home</a>
                                 </li>
+                               
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('kelas') }}">Kelas</a>
                                 </li>
-                                <li class="nav-item">
+                                
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('jadwal') }}">Jadwal</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('podcast') }}">Podcast</a>
                                 </li>
@@ -60,31 +59,27 @@
                                     <a class="nav-link" href="{{ route('about') }}">About</a>
                                 </li>
                                 @guest
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">Masuk</a>
-                                </li>
+                                </li> -->
                                 <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="{{ route('register') }}">Buat Akun</a>
+                                    <a class="btn_1" href="{{ route('login') }}">Login</a>
                                 </li>
                                 @else
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Hi {{ Auth::user()->name }}
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Hi, {{ Auth::user()->nama }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('akun') }}">Akun</a>
-                                        @if (Auth::user()->role == 'regular')
-                                        <a class="dropdown-item" href="{{ route('upgradepremium') }}">Upgrade
-                                            Premium</a>
-                                        @endif
+                                        <a class="dropdown-item" href="{{ route('transaksi.user') }}">Riwayat Transaksi</a>
+
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                       document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
                                     </div>
@@ -127,15 +122,15 @@
                         <h4>Kontak Kami</h4>
                         <div class="social_icon">
                             <ul>
-                            <li>
-                                <i class="bi bi-telephone-fill"></i> <span class="text-icon"> (022)6518166 </span>
-                            </li>
-                            <li>
-                                <i class="bi bi-envelope-fill"></i> <span class="text-icon"> officialbimbelin@gmail.com </span>
-                            </li>
-                            <li>
-                                <i class="bi bi-whatsapp"></i> <span class="text-icon"> +62 856-2469-888 </span>
-                            </li>
+                                <li>
+                                    <i class="bi bi-telephone-fill"></i> <span class="text-icon"> (022)6518166 </span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-envelope-fill"></i> <span class="text-icon"> officialbimbelin@gmail.com </span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-whatsapp"></i> <span class="text-icon"> +62 856-2469-888 </span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -200,16 +195,30 @@
     @if(session('status'))
     <script type="text/javascript">
         Swal.fire({
-      title: 'Sukses ...',
-      icon: 'success',
-      text: '{{ session("status") }}',
-      showClass: {
-        popup: 'animated bounceInDown slow'
-      },
-      hideClass: {
-        popup: 'animated bounceOutDown slow'
-      }
-    })
+            title: 'Sukses...',
+            icon: 'success',
+            text: '{{ session("status") }}',
+            showClass: {
+                popup: 'animated bounceInDown slow'
+            },
+            hideClass: {
+                popup: 'animated bounceOutDown slow'
+            }
+        })
+    </script>
+    @elseif(session('status_error'))
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Error...',
+            icon: 'error',
+            text: '{{ session("status_error") }}',
+            showClass: {
+                popup: 'animated bounceInDown slow'
+            },
+            hideClass: {
+                popup: 'animated bounceOutDown slow'
+            }
+        })
     </script>
     @endif
 </body>

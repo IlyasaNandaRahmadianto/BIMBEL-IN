@@ -26,8 +26,7 @@
                 </div>
                 <div class="content_wrapper">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item"
-                            src="https://www.youtube.com/embed/{{ $podcast->url_podcast }}" allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $podcast->url_podcast }}" frameborder=0 allowfullscreen></iframe>
                     </div>
                     <h4 class="title_top">{{ $podcast->name_podcast }}</h4>
                 </div>

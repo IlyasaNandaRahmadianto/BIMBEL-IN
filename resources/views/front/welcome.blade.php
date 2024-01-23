@@ -1,3 +1,13 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>BIMBEL-IN</title>
+    <link rel="icon" href="{{ asset('frontemplate') }}/img/logo.png">
+</head>
 @extends('layouts.front')
 @section('content')
 
@@ -12,7 +22,11 @@
                         <h1>Belajar Disini Aja</h1>
                         <p>Dengan materi mudah dimengerti dan berbentuk video sehingga membantu proses pembelajaran Anda
                         </p>
-                            <a href="{{ route('pendaftaran') }}" class="btn_1">Gabung Kelas Offline</a>
+                        @if(Auth::user())
+                        <a href="{{ route('daftar_bimbel') }}" class="btn_1">Daftar Bimbel </a>
+                        @else
+                        <a href="{{ route('pendaftaran') }}" class="btn_1">Gabung Kelas </a>
+                        @endif
                     </div>
                 </div>
             </div>

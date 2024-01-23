@@ -1,22 +1,21 @@
 @extends('layouts.front')
 
 @section('content')
-<div class="container mt-5 pt-3 mb-3">
+<div class="container mt-5 pt-3 pb-3 mb-3">
     <div class="row mt-5">
         <div class="col-md-6 mx-auto">
-            <div class="text-center">
+            <div class="text-center p-3">
                 <h3>Daftar Bimbel</h3>
             </div>
             <div class="card-body">
-            <form class="row" action="{{route('front.pendaftaran.simpan')}}" enctype="multipart/form-data" method="post">
+                <form class="row" action="{{route('front.pendaftaran.simpan')}}" enctype="form-data" method="post">
                     @csrf
 
                     <div class="form-group col-md-6">
-                        <label for="nama_pendaftar">Nama Lengkap</label>
-                        <input id="nama_pendaftar" type="text" class="form-control @error('nama_pendaftar') is-invalid @enderror"
-                            name="nama_pendaftar" value="{{ old('nama_pendaftar') }}" required autocomplete="nama_pendaftar" autofocus>
+                        <label for="nama">Nama Lengkap</label>
+                        <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama" autofocus>
 
-                        @error('nama_pendaftar')
+                        @error('nama')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -34,10 +33,28 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="no_hp">Nomor Hp</label>
-                        <input id="no_hp" type="no_hp"
-                            class="form-control @error('no_hp') is-invalid @enderror" name="no_hp" required
-                            autocomplete="no_hp">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email">
+
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password">
+
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="no_hp">Nomor HP</label>
+                        <input id="no_hp" type="text" class="form-control @error('no_hp') is-invalid @enderror" name="no_hp" required autocomplete="no_hp">
 
                         @error('no_hp')
                         <span class="invalid-feedback" role="alert">
@@ -45,47 +62,9 @@
                         </span>
                         @enderror
                     </div>
-
                     <div class="form-group col-md-6">
-                        <label for="jenjang_sekolah">Jenjang Sekolah</label>
-                        <input id="jenjang_sekolah" type="jenjang_sekolah" class="form-control" name="jenjang_sekolah"
-                            required autocomplete="jenjang_sekolah">
-
-                        @error('jenjang_sekolah')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="jenis_kelas">Jenis Kelas</label>
-                        <input id="jenis_kelas" type="jenis_kelas" class="form-control" name="jenis_kelas"
-                            required autocomplete="jenis_kelas">
-
-                        @error('jenis_kelas')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="alamat_rumah">Alamat Rumah</label>
-                        <input id="alamat_rumah" type="alamat_rumah" class="form-control" name="alamat_rumah"
-                            required autocomplete="alamat_rumah">
-
-                        @error('alamat_rumah')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="nama_ortu">Nama Orangtua/Wali</label>
-                        <input id="nama_ortu" type="nama_ortu" class="form-control" name="nama_ortu"
-                            required autocomplete="alamat_rumah">
+                        <label for="nama_ortu">Nama Orang tua/Wali</label>
+                        <input id="nama_ortu" type="text" class="form-control" name="nama_ortu" required autocomplete="nama_ortu">
 
                         @error('nama_ortu')
                         <span class="invalid-feedback" role="alert">
@@ -93,67 +72,28 @@
                         </span>
                         @enderror
                     </div>
+                    <div class="form-group col-md-12">
+                        <label for="alamat">Alamat Rumah</label>
+                        <textarea id="alamat" class="form-control" name="alamat" required autocomplete="alamat"></textarea>
 
-                    <div class="form-group col-md-6">
-                        <label for="no_rekening">Nomor Rekening</label>
-                        <input id="no_rekening" type="no_rekening" class="form-control" name="no_rekening"
-                            required autocomplete="no_rekening">
-
-                        @error('no_rekening')
+                        @error('alamat')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="atas_nama">Rekening Atas Nama</label>
-                        <input id="atas_nama" type="atas_nama" class="form-control" name="atas_nama"
-                            required autocomplete="atas_nama">
-
-                        @error('atas_nama')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        @csrf
-                        <div class="form-group">
-                            <label for="bukti_transfer">Upload Bukti Transfer</label>
-                            <input type="file" class="form-control" name="bukti_transfer">
-                            @error('bukti_transfer')
-                            <small class="mt-2 text-danger"> {{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        @csrf
-                        <div class="form-group">
-                            <label for="status">Status (0 jika Belum Terdaftar, 1 jika Sudah Terdaftar)</label>
-                            <input id="status" type="status" class="form-control" name="status"
-                            required autocomplete="status">
-
-                        @error('status')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                        </div>
-                    </div>
-
-                    <div class="text-center">
-                        <button type="submit" class="btn_4 py-2 btn-block">
-                            Daftar
-                        </button>
-                        <p class="mt-3 btn_4_custom">Mari bergabung bersama Bimbel BIMBEL-IN</p>
-                    </div>
-                </form>
             </div>
-
+            <div class="text-center">
+                <button type="submit" class="btn_4 py-2 btn-block">
+                    Daftar
+                </button>
+                <p class="mt-3 btn_4_custom">Mari bergabung bersama Bimbel BIMBEL-IN</p>
+            </div>
+            </form>
         </div>
+
     </div>
+
 </div>
 @endsection

@@ -17,9 +17,9 @@ class UserController extends Controller
     {
         $data = [
             'title' => 'Dashboard',
-            'user' => User::all()
+            'user' => User::all()->where('role', 'regular')
         ];
-        return view('admin.user.index',$data);
+        return view('admin.user.index', $data);
     }
 
     public function tambah()
@@ -40,6 +40,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
+
             return redirect()->route('admin.user.tambah')->withErrors($validator)->withInput();
         } else {
             $obj = [
@@ -95,17 +96,18 @@ class UserController extends Controller
             return redirect()->route('admin.user.edit', $id)->withErrors($validator)->withInput();
         } else {
             $user = User::find($dec_id);
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->password = $request->password;
-                $user->role = Crypt::decrypt($request->role);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->role = Crypt::decrypt($request->role);
 
             $user->save();
-            return redirect()->route('admin.user.detail',$id)->with('status', 'Berhasil Memperbarui User');
+            return redirect()->route('admin.user.detail', $id)->with('status', 'Berhasil Memperbarui User');
         }
     }
 
-    public function cetak_pdf() {
+    public function cetak_pdf()
+    {
         $user = User::all();
         $pdf = PDF::loadview('admin.user.user_pdf', ['user' => $user]);
         return $pdf->stream();
@@ -117,7 +119,7 @@ class UserController extends Controller
             'title' => 'Edit Profil',
         ];
 
-        return view('admin.akun.editprofil',$data);
+        return view('admin.akun.editprofil', $data);
     }
 
     public function simpaneditprofil(Request $request)
@@ -150,7 +152,7 @@ class UserController extends Controller
         $data = [
             'title' => 'Edit Katasandi',
         ];
-        return view('admin.akun.editkatasandi',$data);
+        return view('admin.akun.editkatasandi', $data);
     }
 
     public function simpaneditkatasandi(Request $request)

@@ -18,30 +18,34 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama User</th>
-                                <th>Status</th>
                                 <th>Tanggal Bayar</th>
-                                <th width="10%">Aksi</th>
+                                <th width="35%">Bukti</th>
+                                <th>Status</th>
+                                <th width="15%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($transaksis as $item)
                             <tr>
                                 <td></td>
-                                <td>{{ $item->users->name }}</td>
+                                <td>{{ $item->nama }}</td>
+                                <td>{{ substr($item->created_at,0,10) }}</td>
+                                <td><img width="35%" src="{{asset('storage/'.$item->bukti_tf)}}" alt="" srcset=""></td>
                                 <td>
-                                    @if ($item->status == 0)
-                                    Belum Dicek
-                                    @elseif($item->status == 1)
-                                    Disetujui
-                                    @else
-                                    Ditolak
+                                    {{$item->status}}
+                                </td>
+                                <td>
+                                    @if($item->status == "diproses")
+                                    <!-- <a href="{{ route('admin.transaksi.detail',Crypt::encrypt($item->id)) }}" class="btn btn-warning ">Detail</a> -->
+                                    <a href="{{ route('admin.transaksi.tolak',Crypt::encrypt($item->id_transaksi)) }}" class="btn btn-danger">Ditolak</a>
+                                    <a href="{{ route('admin.transaksi.setuju',Crypt::encrypt($item->id_transaksi)) }}" class="btn btn-success">Setujui</a>
+                                    @elseif($item->status == "ditolak")
+                                    <a href="{{ route('admin.transaksi.setuju',Crypt::encrypt($item->id_transaksi)) }}" class="btn btn-success">Setujui</a>
+                                    @elseif($item->status == "disetujui")
+                                    <!-- <a href="{{ route('admin.transaksi.setuju',Crypt::encrypt($item->id_transaksi)) }}" class="btn btn-success">Hujui</a> -->
                                     @endif
                                 </td>
-                                <td>{{ substr($item->created_at,0,10) }}</td>
-                                <td>
-                                    <a href="{{ route('admin.transaksi.detail',Crypt::encrypt($item->id)) }}"
-                                        class="btn btn-warning">Detail</a>
-                                </td>
+
                             </tr>
                             @endforeach
                         </tbody>
@@ -51,4 +55,5 @@
         </div>
     </div>
 </div>
+
 @endsection

@@ -18,13 +18,13 @@
 <section class="feature_part">
     <div class="container">
         <div class="row mb-5">
-            <div class="col-sm-6 col-xl-3 align-self-center">
+            <div class="col-sm-6 col-xl-4 align-self-center">
                 <div class="single_feature_text ">
                     <h2>Jenis <br> Kelas</h2>
                     <p>Berikut adalah jenis kelas yang bisa anda akses </p>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-4">
                 <div class="single_feature">
                     <div class="single_feature_part">
                         <span class="single_feature_icon"><i class="ti-layers"></i></span>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-4">
                 <div class="single_feature">
                     <div class="single_feature_part">
                         <span class="single_feature_icon"><i class="ti-new-window"></i></span>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <!-- <div class="col-sm-6 col-xl-3">
                 <div class="single_feature">
                     <div class="single_feature_part single_feature_part_2">
                         <span class="single_service_icon style_icon"><i class="ti-light-bulb"></i></span>
@@ -51,7 +51,7 @@
                             premium</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>

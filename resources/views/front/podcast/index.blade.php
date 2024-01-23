@@ -18,12 +18,11 @@
                     <div class="single_special_cource">
                         <img src="http://img.youtube.com/vi/{{ $item->url_podcast }}/0.jpg" class="special_img" alt="">
                         <div class="special_cource_text">
-                            <div class="d-flex justify-content-between">
-                                <div class="btn_4">
-                                    Podcast
-                                </div>
-                                <a href="{{ route('podcast.detail',Crypt::encrypt($item->id)) }}"
-                                    class="btn btn-secondary">Lihat</a>
+                            <div class="d-flex justify-content-center">
+                                <button class="btn_4 ">
+                                    Lihat Podcast
+                                </button>
+                                <!-- <a href="{{ route('podcast.detail',Crypt::encrypt($item->id)) }}" class="btn btn-secondary">Lihat</a> -->
                             </div>
                             <a href="{{ route('podcast.detail',Crypt::encrypt($item->id)) }}">
                                 <h3>{{ $item->name_podcast }}</h3>

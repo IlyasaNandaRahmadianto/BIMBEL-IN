@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
 //ini halaman awal
@@ -27,9 +31,15 @@ Route::get('/podcast/detail/{id}', 'App\Http\Controllers\front\PodcastController
 Route::get('/pendaftaran', 'App\Http\Controllers\front\PendaftaranController@index')->name('pendaftaran');
 Route::post('/pendaftaran/simpan', 'App\Http\Controllers\front\PendaftaranController@simpan')->name('front.pendaftaran.simpan');
 
+// Route::post('/register', [RegisterController::class, 'register']);
+// Route::get('/login1', [LoginController::class])->name('login');
+// Route::post('/login1', [LoginController::class, 'authenticate'])->name('login1');
+
 //seputar akun
-Route::group(['middleware' => ['auth', 'checkRole:regular,premium']], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/upgradepremium', 'App\Http\Controllers\front\TransaksiController@index')->name('upgradepremium');
+    Route::get('/daftar', 'App\Http\Controllers\front\TransaksiController@daftar')->name('daftar_bimbel');
+    Route::get('/transaksi', 'App\Http\Controllers\front\TransaksiController@index')->name('transaksi.user');
     Route::post('/uploadbukti', 'App\Http\Controllers\front\TransaksiController@uploadbukti')->name('uploadbukti');
     Route::post('/uploadulang', 'App\Http\Controllers\front\TransaksiController@uploadulang')->name('uploadulang');
 
@@ -41,7 +51,7 @@ Route::group(['middleware' => ['auth', 'checkRole:regular,premium']], function (
 });
 
 //ini halaman admin
-Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/admin', 'App\Http\Controllers\admin\DashboardController@index')->name('admin');
 
@@ -101,7 +111,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/admin/transaksi/ditolak', 'App\Http\Controllers\admin\TransaksiController@ditolak')->name('admin.transaksi.ditolak');
     Route::get('/admin/transaksi/disetujui', 'App\Http\Controllers\admin\TransaksiController@disetujui')->name('admin.transaksi.disetujui');
     Route::get('/admin/transaksi/detail/{id}', 'App\Http\Controllers\admin\TransaksiController@detail')->name('admin.transaksi.detail');
-    Route::post('/admin/transaksi/ubah/{id}', 'App\Http\Controllers\admin\TransaksiController@ubah')->name('admin.transaksi.ubah');
+    Route::get('/admin/transaksi/setuju/{id}', 'App\Http\Controllers\admin\TransaksiController@setuju')->name('admin.transaksi.setuju');
+    Route::get('/admin/transaksi/tolak/{id}', 'App\Http\Controllers\admin\TransaksiController@tolak')->name('admin.transaksi.tolak');
     Route::get('/admin/transaksi/transaksi_pdf', 'App\Http\Controllers\admin\TransaksiController@cetak_pdf')->name('admin.transaksi.transaksi_pdf');
 
     //Setting

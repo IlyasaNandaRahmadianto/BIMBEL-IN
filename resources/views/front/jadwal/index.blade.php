@@ -30,7 +30,7 @@
                                 <!-- <td></td> -->
                                 <td>{{ $item->name_tutor }}</td>
                                 <td>{{ $item->type_mapel }}</td>
-                                <td>{{ $item->time_mapel }}</td>
+                                <td>{{@date("D",strtotime( $item->time_mapel ))}}</td>
                             </tr>
                             @endforeach
                         </tbody>

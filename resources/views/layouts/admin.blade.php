@@ -7,10 +7,8 @@
     <title>ADMIN - {{$title}}</title>
     <link rel="icon" href="{{ asset('frontemplate') }}/img/logo.png">
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="{{ asset('admintemplate') }}/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="{{ asset('swal/dist/sweetalert2.min.css') }}" rel="stylesheet">
@@ -22,34 +20,30 @@
 </head>
 
 <body>
-<!-- <script src="https://kit.fontawesome.com/c96bb81d42.js" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://kit.fontawesome.com/c96bb81d42.js" crossorigin="anonymous"></script> -->
     <div id="app">
         <div class="main-wrapper">
             <div class="navbar-bg"></div>
             <nav class="navbar navbar-expand-lg main-navbar">
                 <form class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
-                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
-                                    class="fas fa-bars"></i></a></li>
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
                     </ul>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown"><a href="#" data-toggle="dropdown"
-                            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('admintemplate/') }}/img/avatar/avatar-1.png"
-                                class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <img alt="image" src="{{ asset('admintemplate/') }}/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                            <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->nama }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title">Logged in 5 min ago</div>
                             <div class="dropdown-divider"></div>
-                        <a href="{{ route('admin.editprofil') }}"  class="dropdown-item"><i class="fas fa-user"></i> Edit Profil</a>
-                            <a href="{{ route('admin.editkatasandi') }}"  class="dropdown-item"><i class="fas fa-key"></i> Ubah Katasandi</a>
+                            <a href="{{ route('admin.editprofil') }}" class="dropdown-item"><i class="fas fa-user"></i> Edit Profil</a>
+                            <a href="{{ route('admin.editkatasandi') }}" class="dropdown-item"><i class="fas fa-key"></i> Ubah Katasandi</a>
                             <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i> Logout
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </a>
@@ -83,38 +77,36 @@
                                 <i class="fas fa-university"></i><span>Kelas</span>
                             </a>
                         </li>
-                        <li class="{{Request::path() == 'admin/jadwal' ? 'active' : '' }}">
+                        <!-- <li class="{{Request::path() == 'admin/jadwal' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('admin.jadwal') }}">
                                 <i class="fas fa-calendar"></i><span>Jadwal</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="{{Request::path() == 'admin/podcast' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('admin.podcast') }}">
                                 <i class="fas fa-microphone"></i><span>Podcast</span>
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i
-                                    class="fas fa-fire"></i><span>Transaksi</span></a>
+                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Transaksi</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ route('admin.transaksi') }}">Semua Transaksi</a></li>
-                                <li><a class="nav-link" href="{{ route('admin.transaksi.belumdicek') }}">Belum Dicek</a>
+                                <li><a class="nav-link" href="{{ route('admin.transaksi.belumdicek') }}">Diproses</a>
                                 </li>
                                 <li><a class="nav-link" href="{{ route('admin.transaksi.ditolak') }}">Ditolak</a></li>
-                                <li class=""><a class="nav-link"
-                                        href="{{ route('admin.transaksi.disetujui') }}">Disetujui</a></li>
+                                <li class=""><a class="nav-link" href="{{ route('admin.transaksi.disetujui') }}">Disetujui</a></li>
                             </ul>
                         </li>
-                        <li class="{{Request::path() == 'admin/pendaftaran' ? 'active' : '' }}">
+                        <!-- <li class="{{Request::path() == 'admin/pendaftaran' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('admin.pendaftaran') }}">
                                 <i class="fas fa-address-card"></i><span>Pendaftaran</span>
                             </a>
-                        </li>
-                        <li class="{{Request::path() == 'admin/setting' ? 'active' : '' }}">
+                        </li> -->
+                        <!-- <li class="{{Request::path() == 'admin/setting' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('admin.setting') }}">
                                 <i class="fas fa-newspaper"></i><span>Pengaturan</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </aside>
             </div>
@@ -139,7 +131,7 @@
                             document.write(new Date().getFullYear());
                         </script> | ITATS - Mata Kuliah MPTI | Bimbingan Belajar Bimbel-IN
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p> 
+                    </p>
                 </div>
                 {{-- <div class="footer-right">
                     2.3.0
@@ -149,13 +141,10 @@
     </div>
 
     <!-- General JS Scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 
@@ -175,95 +164,95 @@
     @if(session('status'))
     <script type="text/javascript">
         Swal.fire({
-      title: 'Sukses ...',
-      icon: 'success',
-      text: '{{ session("status") }}',
-      showClass: {
-        popup: 'animated bounceInDown slow'
-      },
-      hideClass: {
-        popup: 'animated bounceOutDown slow'
-      }
-    })
+            title: 'Sukses ...',
+            icon: 'success',
+            text: '{{ session("status") }}',
+            showClass: {
+                popup: 'animated bounceInDown slow'
+            },
+            hideClass: {
+                popup: 'animated bounceOutDown slow'
+            }
+        })
     </script>
     @endif
     <script>
         $(() => {
-          $('#btn-back').on('click', () => {
-            window.history.back();
-          });
-
-          $('#btn-submit').on('click', () => {
-            $('#btn-submit').addClass('btn-progress disabled');
-          });
-          var t = $('#table').DataTable({
-            "columnDefs": [{
-              "searchable": false,
-              "orderable": false,
-              "targets": 0
-            }],
-            "order": [
-              [1, 'asc']
-            ],
-            "language": {
-              "sProcessing": "Sedang memproses ...",
-              "lengthMenu": "Tampilkan _MENU_ data per halaman",
-              "zeroRecord": "Maaf data tidak tersedia",
-              "info": "Menampilkan halaman _PAGE_ dari _PAGES_ halaman",
-              "infoEmpty": "Tidak ada data yang tersedia",
-              "infoFiltered": "(difilter dari _MAX_ total data)",
-              "sSearch": "Cari",
-              "oPaginate": {
-                "sFirst": "Pertama",
-                "sPrevious": "Sebelumnya",
-                "sNext": "Selanjutnya",
-                "sLast": "Terakhir"
-              }
-            }
-          });
-          t.on('order.dt search.dt', function() {
-            t.column(0, {
-              search: 'applied',
-              order: 'applied'
-            }).nodes().each(function(cell, i) {
-              cell.innerHTML = i + 1;
+            $('#btn-back').on('click', () => {
+                window.history.back();
             });
-          }).draw();
+
+            $('#btn-submit').on('click', () => {
+                $('#btn-submit').addClass('btn-progress disabled');
+            });
+            var t = $('#table').DataTable({
+                "columnDefs": [{
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                }],
+                "order": [
+                    [1, 'asc']
+                ],
+                "language": {
+                    "sProcessing": "Sedang memproses ...",
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecord": "Maaf data tidak tersedia",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_ halaman",
+                    "infoEmpty": "Tidak ada data yang tersedia",
+                    "infoFiltered": "(difilter dari _MAX_ total data)",
+                    "sSearch": "Cari",
+                    "oPaginate": {
+                        "sFirst": "Pertama",
+                        "sPrevious": "Sebelumnya",
+                        "sNext": "Selanjutnya",
+                        "sLast": "Terakhir"
+                    }
+                }
+            });
+            t.on('order.dt search.dt', function() {
+                t.column(0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).nodes().each(function(cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
         })
     </script>
     <script>
         const alertconfirmn = (url) => {
-                const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger mr-2'
-            },
-            buttonsStyling: false
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger mr-2'
+                },
+                buttonsStyling: false
             })
 
             swalWithBootstrapButtons.fire({
-            title: 'Yakin ingin menghapus ?',
-            text: "Data yang dihapus tidak dapat dikembalikan kembali !",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Hapus !',
-            cancelButtonText: 'Tidak, Batalkan !',
-            reverseButtons: true
+                title: 'Yakin ingin menghapus ?',
+                text: "Data yang dihapus tidak dapat dikembalikan kembali !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus !',
+                cancelButtonText: 'Tidak, Batalkan !',
+                reverseButtons: true
             }).then((result) => {
-            if (result.value) {
-                window.location.replace(url);
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire(
-                'Dibatalkan',
-                'Data kamu tidak jadi dihapus :)',
-                'error'
-                )
-            }
+                if (result.value) {
+                    window.location.replace(url);
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Dibatalkan',
+                        'Data kamu tidak jadi dihapus :)',
+                        'error'
+                    )
+                }
             })
-  }
+        }
     </script>
     @yield('js')
     <!-- Page Specific JS File -->

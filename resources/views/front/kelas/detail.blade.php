@@ -22,36 +22,50 @@
         <div class="row">
             <div class="col-lg-8 course_details_left">
                 <div class="main_image">
-                    <img class="img-fluid" src="img/single_cource.png" alt="">
-                </div>
-                <div class="content_wrapper">
-                    <img src="frontemplate/img/advance_feature_img.png" width="300" alt="">
-                    <h4 class="title_top">{{ $kelas->name_kelas }}</h4>
-                    <div class="content">
-                        {!! $kelas->description_kelas !!}
                     </div>
+                    <div class="content_wrapper">
+                        <img src="frontemplate/img/advance_feature_img.png" width="300" alt="">
+                        <h4 class="title_top">{{ $kelas->name_kelas }}</h4>
+                        <div class="content">
+                            {!! $kelas->description_kelas !!}
+                        </div>
+                        <div class="text-center">
 
+                            <img src="{{asset('frontemplate/img/geografi.jpg')}}" class="img_fluid" alt="" width="50%">
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 right-contents">
+                <div class="sidebar_top">
                     <h4 class="title">Daftar Materi</h4>
                     <div class="content">
                         <ul class="course_list">
-                            @if ($kelas->video->count() < 1) <li
-                                class="justify-content-between align-items-center d-flex">
-                                <p>Belum Ada Materi</p>
-                                </li>
+                            @if(Auth::user())
+                                @if ($materi!='[]') 
+                                @foreach ($materi as $item)
+                                    <li class="justify-content-between align-items-center d-flex">
+                                        <a href="#">{{ $item->judul_materi }}</a>
+                                    </li>
+                                    @endforeach
                                 @else
-                                @foreach ($kelas->video as $item)
-                                <li class="justify-content-between align-items-center d-flex">
-                                    <p>{{ $item->name_video }}</p>
-                                </li>
-                                @endforeach
+                                <li
+                                    class="justify-content-between align-items-center d-flex">
+                                    <p>Belum Ada Materi</p>
+                                    </li>
+                                    
                                 @endif
+                            @else
+                            <div class="text-center">
+                                <p>Login terlebih dahulu sebelum mengakses kelas</p>
+                                <a href="{{route('login')}}" class="btn btn-lg btn-primary rounded-2">Login</a>
+                            </div>
+                            @endif
                         </ul>
                     </div>
                 </div>
             </div>
-
-
-            <div class="col-lg-4 right-contents">
+            <!-- <div class="col-lg-4 right-contents">
                 <div class="sidebar_top">
                     <ul>
                         <li>
@@ -61,56 +75,11 @@
                             </a>
                         </li>
                         <li>
-                            <a class="justify-content-between d-flex" href="#">
-                                <p>Tipe Kelas </p>
-                                <span>
-                                    @if ($kelas->type_kelas == 0)
-                                    Gratis
-                                    @elseif($kelas->type_kelas == 1)
-                                    Regular
-                                    @elseif($kelas->type_kelas == 2)
-                                    Premium
-                                    @elseif($kelas->type_kelas == 3)
-                                    Regular
-                                    @endif
-                                </span>
-                            </a>
+                            
                         </li>
                     </ul>
-                    @if ($kelas->video->count() > 0)
-                    @if ($kelas->type_kelas == 0 || $kelas->type_kelas == 3)
-                    <a href="{{ route('kelas.belajar',[
-                        'id' => Crypt::encrypt($kelas->id),
-                        'idvideo' => Crypt::encrypt($kelas->video[0]->id)
-                    ]) }}" class="btn_1 d-block">Belajar</a>
-                    @else
-                    @guest
-                    Anda harus membuat akun untuk mengakses kelas ini
-                    <a href="{{ route('register') }}" class="btn_1 d-block">Buat Akun</a>
-                    @else
-                    @if($kelas->type_kelas == 1)
-                    <a href="{{ route('kelas.belajar',[
-                        'id' => Crypt::encrypt($kelas->id),
-                        'idvideo' => Crypt::encrypt($kelas->video[0]->id)
-                    ]) }}" class="btn_1 d-block">Belajar</a>
-                    @else
-                    @if (Auth::user()->role == 'premium')
-                    <a href="{{ route('kelas.belajar',[
-                        'id' => Crypt::encrypt($kelas->id),
-                        'idvideo' => Crypt::encrypt($kelas->video[0]->id)
-                    ]) }}" class="btn_1 d-block">Belajar</a>
-                    @else
-                    Upgrade akun Anda ke premium untuk mengakses kelas ini
-                    <a href="{{ route('upgradepremium') }}" class="btn_1 d-block">Upgrade Premium</a>
-                    @endif
-                    @endif
-                    @endguest
-                    @endif
-                    @else
-                    Belum Ada Materi Pada Kelas Ini
-                    @endif
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
